@@ -14,11 +14,11 @@ const ChatConsole = () => {
   };
 
   return (
-    <section id="aiadvice" className="bg-neutral-100 py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
         <div className="text-center mb-16 animate__animated animate__fadeIn">
-          <h2 className="text-4xl font-bold text-neutral-900 mb-4">AI-Powered Spiritual Recommendations</h2>
-          <p className="text-xl text-neutral-600">Personalized guidance powered by advanced artificial intelligence</p>
+          <h2 className="text-4xl font-bold text-white mb-4">AI-Powered Spiritual Recommendations</h2>
+          {/* <p className="text-xl text-neutral-600">Personalized guidance powered by advanced artificial intelligence</p> */}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -104,7 +104,7 @@ const ChatConsole = () => {
           </div>
         </div>
       </div>
-    </section>
+    
   );
 };
 
