@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BackgroundBeamsWithCollision } from '../ui/background-beams-with-collision';
 
 const Hero = () => {
 
@@ -11,8 +12,9 @@ const Hero = () => {
 
 
   return (
-    <section id="hero" className="bg-neutral-900 text-white min-h-[100vh] pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <BackgroundBeamsWithCollision>
+    
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-white">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Side: Hero Text and Buttons */}
           <div className="animate__animated animate__fadeInLeft">
@@ -84,7 +86,7 @@ const Hero = () => {
       </div>
       {/* Gradient at the bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-neutral-800 to-transparent"></div>
-    </section>
+    </BackgroundBeamsWithCollision>
   );
 };
 
