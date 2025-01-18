@@ -1,122 +1,131 @@
-import React from "react";
+import React from 'react';
 
 const DashboardHome = () => {
+  const currentDate = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
   return (
-    <section id="dashboard" className="p-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Daily Horoscope Card */}
-        <div className="bg-white rounded-lg border border-neutral-200/30 p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold text-purple-700">Daily Horoscope</h3>
-            <span className="text-sm text-neutral-500">Today</span>
-          </div>
-          <p className="text-neutral-600 mb-4">
-            Your spiritual energy is aligned with success today. Focus on meditation and inner peace.
-          </p>
-          <a href="#horoscope" className="text-purple-600 text-sm hover:text-purple-700 transition-colors">
-            View Full Horoscope →
-          </a>
-        </div>
-
-        {/* Meditation Timer */}
-        <div className="bg-white rounded-lg border border-neutral-200/30 p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold text-purple-700">Daily Meditation</h3>
-            <span className="text-sm text-neutral-500">20 mins</span>
-          </div>
-          <div className="flex justify-center items-center mb-4">
-            <div className="w-32 h-32 rounded-full border-4 border-purple-200 flex items-center justify-center">
-              <span className="text-2xl font-bold text-purple-700">20:00</span>
+    <div className="p-6" id="dashboard_home">
+      {/* Welcome Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6" id="el-jaew3tkq">
+        <div className="bg-white p-6 rounded-lg border border-neutral-200/30 col-span-2" id="el-z5zzg3dl">
+          <div className="flex items-center justify-between mb-4" id="el-sdalsu54">
+            <div id="el-tb91gv9n">
+              <h3 className="text-2xl font-bold text-gray-800" id="el-z3hs9dfu">Welcome back, John</h3>
+              <p className="text-gray-600" id="el-wdgcjfib">Your spiritual journey continues</p>
+            </div>
+            <div className="text-right" id="el-dco9grp5">
+              <p className="text-sm text-gray-600" id="el-w94yjhcc">Today's Date</p>
+              <p className="text-lg font-semibold text-gray-800" id="currentDate">{currentDate}</p>
             </div>
           </div>
-          <button className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
-            Start Session
-          </button>
-        </div>
-
-        {/* Gemstone Recommendation */}
-        <div className="bg-white rounded-lg border border-neutral-200/30 p-6">
-          <h3 className="text-lg font-semibold text-purple-700 mb-4">Recommended Gemstone</h3>
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-purple-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4" id="el-3vj09z5p">
+            {[
+              { title: 'Lucky Number', value: '7', color: 'indigo' },
+              { title: 'Lucky Color', value: 'Blue', color: 'purple' },
+              { title: 'Lucky Direction', value: 'North', color: 'rose' },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className={`bg-${item.color}-50 p-4 rounded-lg border border-${item.color}-100`}
+                id={`el-${index}`}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-                />
-              </svg>
-            </div>
-            <div>
-              <h4 className="font-semibold">Blue Sapphire</h4>
-              <p className="text-sm text-neutral-500">For Saturn's Influence</p>
-            </div>
+                <h4 className={`text-${item.color}-600 font-semibold`} id={`el-title-${index}`}>{item.title}</h4>
+                <p className={`text-2xl font-bold text-${item.color}-700`} id={`el-value-${index}`}>{item.value}</p>
+              </div>
+            ))}
           </div>
-          <a href="#recommendations" className="text-purple-600 text-sm hover:text-purple-700 transition-colors">
-            View Details →
-          </a>
         </div>
-
-        {/* Upcoming Rituals */}
-        <div className="bg-white rounded-lg border border-neutral-200/30 p-6">
-          <h3 className="text-lg font-semibold text-purple-700 mb-4">Today's Rituals</h3>
-          <ul className="space-y-4">
-            <li className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span className="text-neutral-600">Morning Meditation - 6:00 AM</span>
-            </li>
-            <li className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span className="text-neutral-600">Evening Prayer - 6:30 PM</span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Birth Chart Overview */}
-        <div className="bg-white rounded-lg border border-neutral-200/30 p-6">
-          <h3 className="text-lg font-semibold text-purple-700 mb-4">Birth Chart Highlights</h3>
-          <div className="space-y-3">
-            <div className="flex justify-between">
-              <span className="text-neutral-600">Rising Sign</span>
-              <span className="font-medium">Leo</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-neutral-600">Moon Sign</span>
-              <span className="font-medium">Pisces</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-neutral-600">Sun Sign</span>
-              <span className="font-medium">Virgo</span>
-            </div>
+        <div className="bg-white p-6 rounded-lg border border-neutral-200/30" id="el-p7wlkb88">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4" id="el-t5hu53pt">Quick Actions</h3>
+          <div className="space-y-3" id="el-jabeakuh">
+            {['Generate Birth Chart', 'View Horoscope', 'Start Meditation'].map((action, index) => (
+              <button
+                key={index}
+                className={`w-full bg-indigo-50 text-indigo-600 p-3 rounded-lg border border-indigo-100 text-left hover:bg-indigo-100 transition-colors`}
+                id={`el-action-${index}`}
+              >
+                {action}
+              </button>
+            ))}
           </div>
-          <a
-            href="#birthchart"
-            className="mt-4 inline-block text-purple-600 text-sm hover:text-purple-700 transition-colors"
-          >
-            View Full Chart →
-          </a>
-        </div>
-
-        {/* AI Chat Quick Access */}
-        <div className="bg-white rounded-lg border border-neutral-200/30 p-6">
-          <h3 className="text-lg font-semibold text-purple-700 mb-4">Spiritual Guide</h3>
-          <div className="bg-purple-50 rounded-lg p-4 mb-4">
-            <p className="text-neutral-600 text-sm">
-              Ask me anything about your spiritual journey or daily guidance.
-            </p>
-          </div>
-          <button className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
-            Start Chat
-          </button>
         </div>
       </div>
-    </section>
+
+      {/* Daily Insights */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6" id="el-29cp9efu">
+        {[
+          {
+            title: 'Daily Ritual',
+            description: 'Perform Surya Namaskar at sunrise',
+            iconColor: 'amber',
+            iconPath: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707',
+          },
+          {
+            title: 'Gemstone Recommendation',
+            description: 'Wear on middle finger for enhanced wisdom',
+            iconColor: 'emerald',
+            iconPath: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
+          },
+          {
+            title: "Today's Meditation",
+            description: '15 minutes guided session',
+            iconColor: 'blue',
+            iconPath: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+          },
+        ].map((item, index) => (
+          <div key={index} className="bg-white p-6 rounded-lg border border-neutral-200/30" id={`el-insight-${index}`}>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4" id={`el-title-${index}`}>{item.title}</h3>
+            <div className="flex items-start gap-4" id={`el-content-${index}`}>
+              <div
+                className={`w-12 h-12 bg-${item.iconColor}-50 rounded-full flex items-center justify-center`}
+                id={`el-icon-${index}`}
+              >
+                <svg className={`w-6 h-6 text-${item.iconColor}-600`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.iconPath}></path>
+                </svg>
+              </div>
+              <div id={`el-description-${index}`}>
+                <h4 className="font-semibold text-gray-800">{item.title}</h4>
+                <p className="text-gray-600 text-sm">{item.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Upcoming Events */}
+      <div className="bg-white p-6 rounded-lg border border-neutral-200/30 mb-6" id="el-b4eh4iol">
+        <h3 className="text-lg font-semibold text-gray-800 mb-4" id="el-n5m2ekfj">Upcoming Auspicious Events</h3>
+        <div className="overflow-x-auto" id="el-vq76zs1l">
+          <table className="w-full" id="el-0e9cweuo">
+            <thead id="el-pxopv87p">
+              <tr className="border-b border-neutral-200/30">
+                <th className="text-left py-3 px-4 text-gray-600">Date</th>
+                <th className="text-left py-3 px-4 text-gray-600">Event</th>
+                <th className="text-left py-3 px-4 text-gray-600">Recommended Activity</th>
+              </tr>
+            </thead>
+            <tbody id="el-p4qsnpww">
+              {[
+                { date: 'June 15, 2024', event: 'Full Moon', activity: 'Meditation & Prayer' },
+                { date: 'June 21, 2024', event: 'Summer Solstice', activity: 'Surya Namaskar' },
+              ].map((item, index) => (
+                <tr key={index} className="border-b border-neutral-200/30">
+                  <td className="py-3 px-4">{item.date}</td>
+                  <td className="py-3 px-4">{item.event}</td>
+                  <td className="py-3 px-4">{item.activity}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   );
 };
 
