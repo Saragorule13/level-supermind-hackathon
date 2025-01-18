@@ -8,6 +8,10 @@ app.get("/", (req, res) => {
   res.send("Horo Backend is running");
 });
 
+app.post("/api/getHoroscope", (req, res) => {
+  
+});
+
 // Start the server
 const PORT = 3000 || process.env.PORT;
 server.listen(PORT, () => {
