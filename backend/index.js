@@ -20,6 +20,6 @@ app.post("/api/getHoroscope", (req, res) => {});
 
 // Start the server
 const PORT = 3000 || process.env.PORT;
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
