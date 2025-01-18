@@ -20,11 +20,7 @@ const getCityCoordinates = async (city) => {
 };
 
 // Function to get the zodiac sign based on the birthdate
-const getZodiacSign = (birthdate) => {
-  const date = new Date(birthdate);
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
+const getZodiacSign = ({month, day}) => {
   if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) {
     return "Aquarius";
   } else if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) {
