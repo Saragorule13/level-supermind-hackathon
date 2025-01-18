@@ -9,7 +9,7 @@ const Sidebar = () => {
       <div className="px-2" id="el-qgxw9wsd">
         <a
           href="#dashboard"
-          className="flex items-center px-4 py-2 mb-1 text-gray-700 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-all active bg-indigo-50 text-indigo-600"
+          className="flex items-center px-4 py-2 mb-1 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-all active bg-indigo-50 text-indigo-600"
           id="el-oqoj2qyb"
         >
           Dashboard
