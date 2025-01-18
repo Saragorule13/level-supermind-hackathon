@@ -1,3 +1,5 @@
+import { FaGithub, FaYoutube } from 'react-icons/fa';
+
 const Navbar = () => {
     const toggleMobileMenu = () => {
       const mobileMenu = document.getElementById('mobile-menu');
@@ -16,16 +18,11 @@ const Navbar = () => {
               </div>
             </div>
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                {['Home', 'Features', 'Languages', 'Metrics', 'How It Works', 'Try Demo', 'Docs', 'Contact'].map((item) => (
-                  <a
-                    href={`#${item.toLowerCase().replace(/ /g, '')}`}
-                    key={item}
-                    className="hover:bg-neutral-700 px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    {item}
-                  </a>
-                ))}
+              <div className="ml-10 flex items-baseline space-x-4 gap-5">
+               <a href="/">Home</a>
+               <a href="#features">Features</a>
+               <a className='flex items-center gap-2' href="https://github.com/Saragorule13/level-supermind-hackathon"><FaGithub/>Github</a>
+               <a className='flex items-center gap-2' href="#"><FaYoutube/>Youtube</a>
               </div>
             </div>
             <div className="md:hidden">
@@ -52,7 +49,7 @@ const Navbar = () => {
         </div>
         <div className="md:hidden hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-neutral-900">
-            {['Home', 'Features', 'Languages', 'Metrics', 'How It Works', 'Try Demo', 'Docs', 'Contact'].map((item) => (
+            {['Home', 'Features', ].map((item) => (
               <a
                 href={`#${item.toLowerCase().replace(/ /g, '')}`}
                 key={item}

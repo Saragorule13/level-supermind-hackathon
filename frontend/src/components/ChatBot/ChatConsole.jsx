@@ -2,145 +2,103 @@ import React, { useState } from 'react';
 
 const ChatConsole = () => {
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([
-    {
-      sender: 'AI',
-      content: 'Namaste! I\'m your spiritual guide. How can I assist you on your spiritual journey today?',
-      time: '10:30 AM',
-    },
+  const [chatMessages, setChatMessages] = useState([
+    { sender: 'ai', text: 'Hello! I\'m your spiritual AI guide. How can I assist you today?' }
   ]);
 
   const handleSendMessage = () => {
     if (message.trim()) {
-      const newMessage = {
-        sender: 'User',
-        content: message,
-        time: new Date().toLocaleTimeString(),
-      };
-      setMessages([...messages, newMessage]);
+      setChatMessages([...chatMessages, { sender: 'user', text: message }]);
       setMessage('');
     }
   };
 
   return (
-    <section id="chat_console" className="pt-16 p-6">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Chat Interface */}
-        <div className="lg:col-span-8 bg-white rounded-lg border border-neutral-200/40">
-          {/* Chat Header */}
-          <div className="border-b border-neutral-200/40 p-4">
-            <div className="flex items-center">
-              <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
-                <span className="text-indigo-600 text-xl">🔮</span>
-              </div>
-              <div className="ml-3">
-                <h2 className="text-lg font-semibold text-gray-800">SoulBuddy AI</h2>
-                <p className="text-sm text-gray-600">Your spiritual guide</p>
-              </div>
-              <div className="ml-auto">
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Online</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Chat Messages */}
-          <div className="h-[calc(100vh-350px)] overflow-y-auto p-4 space-y-4">
-            {messages.map((msg, index) => (
-              <div key={index} className={`flex items-start space-x-3 ${msg.sender === 'User' ? 'justify-end' : ''}`}>
-                {msg.sender === 'AI' ? (
-                  <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
-                    <span className="text-indigo-600 text-sm">AI</span>
-                  </div>
-                ) : (
-                  <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                    <img
-                      src="https://avatar.iran.liara.run/public"
-                      alt="User"
-                      className="w-8 h-8 rounded-full transition-opacity duration-300 opacity-100"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-                <div className={`bg-${msg.sender === 'AI' ? 'gray' : 'indigo'}-100 rounded-lg p-3 max-w-[80%]`}>
-                  <p className={`${msg.sender === 'AI' ? 'text-gray-800' : 'text-white'}`}>{msg.content}</p>
-                  <span className="text-xs text-gray-500 mt-1 block">{msg.time}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Chat Input */}
-          <div className="border-t border-neutral-200/40 p-4">
-            <div className="flex space-x-4">
-              <input
-                type="text"
-                placeholder="Ask your spiritual question..."
-                className="flex-1 border border-neutral-200 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-600"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-              />
-              <button
-                className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-                onClick={handleSendMessage}
-              >
-                Send
-              </button>
-            </div>
-          </div>
+    <section id="aiadvice" className="bg-neutral-100 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16 animate__animated animate__fadeIn">
+          <h2 className="text-4xl font-bold text-neutral-900 mb-4">AI-Powered Spiritual Recommendations</h2>
+          <p className="text-xl text-neutral-600">Personalized guidance powered by advanced artificial intelligence</p>
         </div>
 
-        {/* Sidebar */}
-        <div className="lg:col-span-4 space-y-6">
-          {/* Quick Questions */}
-          <div className="bg-white p-6 rounded-lg border border-neutral-200/40">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Questions</h3>
-            <div className="space-y-3">
-              <button className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition-colors text-gray-700">
-                What's my lucky color today?
-              </button>
-              <button className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition-colors text-gray-700">
-                Recommend a morning ritual
-              </button>
-              <button className="w-full text-left p-3 bg-gray-50 rounded-lg hover:bg-indigo-50 transition-colors text-gray-700">
-                Best time for important decisions?
-              </button>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Chatbot Demo */}
+          <div className="animate__animated animate__fadeInLeft">
+            <div className="bg-white rounded-xl shadow-xl p-6">
+              <div className="border-b pb-4 mb-4">
+                <h3 className="text-xl font-bold text-neutral-900">Spiritual AI Chatbot</h3>
+              </div>
+              <div className="space-y-4 h-[400px] overflow-y-auto mb-4" id="chat-messages">
+                {chatMessages.map((msg, index) => (
+                  <div key={index} className={`flex items-start ${msg.sender === 'user' ? 'justify-end' : ''}`}>
+                    <div className={`${msg.sender === 'user' ? 'bg-neutral-300' : 'bg-violet-500'} rounded-full p-2`}>
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={msg.sender === 'user' ? "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" : "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"}></path>
+                      </svg>
+                    </div>
+                    <div className={`ml-4 ${msg.sender === 'user' ? 'bg-neutral-100' : 'bg-violet-50'} rounded-lg p-4 max-w-[80%]`}>
+                      <p className="text-neutral-800">{msg.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="text"
+                  className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  placeholder="Ask your question..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+                <button
+                  className="bg-violet-500 text-white px-4 py-2 rounded-lg hover:bg-violet-600 transition duration-300"
+                  onClick={handleSendMessage}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Recent Topics */}
-          <div className="bg-white p-6 rounded-lg border border-neutral-200/40">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Topics</h3>
-            <div className="space-y-3">
-              <div className="flex items-center text-gray-700">
-                <span className="mr-2">🕉️</span>
-                <span>Meditation techniques</span>
+          {/* AI Features */}
+          <div className="animate__animated animate__fadeInRight">
+            <div className="space-y-6">
+              <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                <h4 className="text-xl font-semibold mb-4 flex items-center">
+                  <span className="bg-violet-100 p-2 rounded-lg mr-3">
+                    <svg className="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </span>
+                  Personalized Gemstone Recommendations
+                </h4>
+                <p className="text-neutral-600">AI-driven suggestions for gemstones based on your astrological chart and current life situations.</p>
               </div>
-              <div className="flex items-center text-gray-700">
-                <span className="mr-2">💎</span>
-                <span>Gemstone recommendations</span>
-              </div>
-              <div className="flex items-center text-gray-700">
-                <span className="mr-2">🌟</span>
-                <span>Career guidance</span>
-              </div>
-            </div>
-          </div>
 
-          {/* Chat Stats */}
-          <div className="bg-white p-6 rounded-lg border border-neutral-200/40">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Insights</h3>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-gray-600">Questions Asked</span>
-                <span className="font-medium text-indigo-600">24</span>
+              <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                <h4 className="text-xl font-semibold mb-4 flex items-center">
+                  <span className="bg-violet-100 p-2 rounded-lg mr-3">
+                    <svg className="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                  </span>
+                  Ritual &amp; Pooja Guidance
+                </h4>
+                <p className="text-neutral-600">Customized spiritual practices and rituals aligned with your cosmic energies.</p>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-600">Predictions Accuracy</span>
-                <span className="font-medium text-indigo-600">92%</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-600">Helpful Responses</span>
-                <span className="font-medium text-indigo-600">98%</span>
+
+              <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition duration-300">
+                <h4 className="text-xl font-semibold mb-4 flex items-center">
+                  <span className="bg-violet-100 p-2 rounded-lg mr-3">
+                    <svg className="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    </svg>
+                  </span>
+                  Do's &amp; Don'ts Analysis
+                </h4>
+                <p className="text-neutral-600">Personalized daily and monthly guidelines based on astrological transits.</p>
               </div>
             </div>
           </div>
