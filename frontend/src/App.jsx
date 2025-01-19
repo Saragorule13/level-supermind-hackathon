@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
 import ChatBot from './pages/ChatBot';
 import ProtectedRoute from './components/ProtectedRoute';
+import FirstTimeUserCheck from './components/FirstTimeUserCheck';
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -24,7 +25,9 @@ const App = () => {
           path="/dashboard" 
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <FirstTimeUserCheck>
+                <Dashboard />
+              </FirstTimeUserCheck>
             </ProtectedRoute>
           } 
         />
@@ -32,7 +35,9 @@ const App = () => {
           path="/chatbot" 
           element={
             <ProtectedRoute>
-              <ChatBot />
+              <FirstTimeUserCheck>
+                <ChatBot />
+              </FirstTimeUserCheck>
             </ProtectedRoute>
           } 
         />

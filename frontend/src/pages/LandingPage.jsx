@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../components/LandingPageComponents/Navbar'
 import Hero from '../components/LandingPageComponents/Hero'
 import FeaturesSection from '../components/LandingPageComponents/Features'
-import HoroscopeSection from '../components/LandingPageComponents/Horoscope'
+//import HoroscopeSection from '../components/LandingPageComponents/Horoscope'
 import AIAdviceSection from '../components/LandingPageComponents/AIAdviceSection'
 import SpiritualContent from '../components/LandingPageComponents/SpiritualSection'
 import Footer from '../components/LandingPageComponents/Footer'
@@ -14,7 +14,7 @@ export default function LandingPage() {
       <Navbar/>
       <Hero/>
       <FeaturesSection/>
-      <HoroscopeSection/>
+      {/* <HoroscopeSection/> */}
       <AIAdviceSection/>
       <SpiritualContent/>
       <TestimonialsSection/>
