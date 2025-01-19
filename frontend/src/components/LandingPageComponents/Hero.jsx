@@ -1,13 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 import { BackgroundBeamsWithCollision } from '../ui/background-beams-with-collision';
 
 const Hero = () => {
 
   const navigate = useNavigate();
+  const { isSignedIn } = useAuth();
 
   const handleNavigate = (route) => {
-    navigate(route);
+    if (isSignedIn) {
+      navigate(route);
+    } else {
+      navigate('/sign-in');
+    }
   };
 
 

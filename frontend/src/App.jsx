@@ -1,21 +1,44 @@
 import React from 'react';
+import { ClerkProvider, SignIn, SignUp } from '@clerk/clerk-react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import {Routes, Route} from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import ChatBot from './pages/ChatBot';
+import ProtectedRoute from './components/ProtectedRoute';
 
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
+const App = () => {
+  const navigate = useNavigate();
 
-const App = () => (
-  <div>
-    
-    <Routes>
-      <Route path="/" element={<LandingPage/>}/>
-      <Route path="/dashboard" element={<Dashboard/>}/>
-      <Route path="/chatbot" element={<ChatBot/>}/>
-    </Routes>
-    
-  </div>
-);
+  return (
+    <ClerkProvider 
+      publishableKey={clerkPubKey}
+      navigate={(to) => navigate(to)}
+    >
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/sign-in/*" element={<SignIn routing="path" path="/sign-in" />} />
+        <Route path="/sign-up/*" element={<SignUp routing="path" path="/sign-up" />} />
+        <Route 
+          path="/dashboard" 
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/chatbot" 
+          element={
+            <ProtectedRoute>
+              <ChatBot />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+    </ClerkProvider>
+  );
+};
 
 export default App;

@@ -1,8 +1,10 @@
 import { FaGithub, FaYoutube } from 'react-icons/fa';
+import { useAuth, SignInButton, SignOutButton } from '@clerk/clerk-react';
 import assets from '../../assets/assets.js'
 
 
 const Navbar = () => {
+    const { isSignedIn } = useAuth();
     const toggleMobileMenu = () => {
       const mobileMenu = document.getElementById('mobile-menu');
       if (mobileMenu) {
@@ -47,6 +49,21 @@ const Navbar = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
+            </div>
+            <div className="flex items-center">
+              {isSignedIn ? (
+                <SignOutButton>
+                  <button className="bg-neutral-700 text-white px-4 py-2 rounded-lg hover:bg-neutral-600 transition-colors">
+                    Sign Out
+                  </button>
+                </SignOutButton>
+              ) : (
+                <SignInButton mode="modal">
+                  <button className="bg-violet-600 text-white px-4 py-2 rounded-lg hover:bg-violet-700 transition-colors">
+                    Sign In
+                  </button>
+                </SignInButton>
+              )}
             </div>
           </div>
         </div>

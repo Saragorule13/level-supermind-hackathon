@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useClerk } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
 
-const Header = () => {
+const DashboardHeader = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+  const { signOut } = useClerk();
+  const navigate = useNavigate();
+
+  // Handle click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/');
+  };
+
   return (
     <header className="sticky top-0 z-10 bg-neutral-900 border-b border-neutral-200/20 px-6 py-4" id="el-q0w35w3l">
       <div className="flex items-center justify-between" id="el-ac2mmji5">
@@ -23,19 +47,40 @@ const Header = () => {
               ></path>
             </svg>
           </button>
-          <button className="flex items-center gap-2" id="el-g1tenzfg">
-            <img
-              src="https://avatar.iran.liara.run/public"
-              alt="Profile"
-              className="w-8 h-8 rounded-full transition-opacity duration-300 opacity-100"
-              loading="lazy"
-              id="el-sfajirc9"
-            />
-          </button>
+          <div className="relative" ref={dropdownRef}>
+            <button 
+              className="flex items-center gap-2" 
+              id="el-g1tenzfg"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              <img 
+                src="https://avatar.iran.liara.run/public" 
+                alt="Profile" 
+                className="w-8 h-8 rounded-full transition-opacity duration-300 opacity-100" 
+                loading="lazy" 
+                id="el-sfajirc9" 
+              />
+            </button>
+
+            {/* Dropdown Menu */}
+            {showDropdown && (
+              <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-neutral-800 ring-1 ring-black ring-opacity-5 z-50">
+                <div className="py-1" role="menu" aria-orientation="vertical">
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-neutral-700 transition-colors"
+                    role="menuitem"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>
   );
 };
 
-export default Header;
+export default DashboardHeader;
