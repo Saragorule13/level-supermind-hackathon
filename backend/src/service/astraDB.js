@@ -2,21 +2,7 @@ import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
 
-// const data = {
-//   id: "266c666c",
-//   metadata: {
-//     name: "Smit Thomas",
-//     age: 69,
-//     gender: "Male",
-//     bod: "27-04-1998",
-//     tod: "21:07:35",
-//     city: "Stew",
-//     state: "Wisconsin",
-//     username: "user1021",
-//   },
-// };
-
-const insertData = async (data) => {
+export const insertData = async (data) => {
   try {
     const headers = {
       Token: process.env.ASTRA_DB_TOKEN,

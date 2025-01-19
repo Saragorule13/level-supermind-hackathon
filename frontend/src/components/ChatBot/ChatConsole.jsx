@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useUser } from '@clerk/clerk-react';
 
 const ChatConsole = () => {
+  const user = useUser();
   const [message, setMessage] = useState("");
   const [chatMessages, setChatMessages] = useState([
     {
@@ -24,7 +26,7 @@ const ChatConsole = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ message: message }),
+            body: JSON.stringify({ message: message, userID: user.id  }),
           }
         );
 

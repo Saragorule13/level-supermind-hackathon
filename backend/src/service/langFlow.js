@@ -5,7 +5,7 @@ dotenv.config();
 const LANGFLOW_API_URL = process.env.LANGFLOW_API_URL;
 const APPLICATION_TOKEN = process.env.APPLICATION_TOKEN;
 
-const langflowClient = async (userMessage) => {
+const langflowClient = async (userMessage, userId) => {
   try {
     if (!LANGFLOW_API_URL || !APPLICATION_TOKEN) {
       throw new Error('Missing required environment variables');
@@ -28,7 +28,9 @@ const langflowClient = async (userMessage) => {
         output_type: "chat",
         input_type: "chat",
         tweaks: {
-          "AstraDB-3nUiD": {},
+          "AstraDB-3nUiD": {
+            "search_input": userId
+          },
           "ParseData-nmPhm": {},
           "ChatInput-LrwV1": {},
           "Prompt-4oQba": {},
