@@ -3,19 +3,28 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const LANGFLOW_API_URL = process.env.LANGFLOW_API_URL;
-const APPLICATION_TOKEN = process.env.LANGFLOW_APPLICATION_TOKEN;
+const APPLICATION_TOKEN = process.env.APPLICATION_TOKEN;
 
-const langflowClient = async () => {
+const langflowClient = async (userMessage) => {
   try {
+    if (!LANGFLOW_API_URL || !APPLICATION_TOKEN) {
+      throw new Error('Missing required environment variables');
+    }
+
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${APPLICATION_TOKEN}`,
     };
 
+    console.log('Sending request to LangFlow:', {
+      url: LANGFLOW_API_URL,
+      message: userMessage
+    });
+
     const response = await axios.post(
-      `${LANGFLOW_API_URL}/lf/5800bf39-8644-403e-bca4-1732cdb12419/api/v1/run/d4f16cc4-fd21-44d6-8182-eb0930265937?stream=false`,
+      `${LANGFLOW_API_URL}`,
       {
-        input_value: "what sign is best suited as my partner",
+        input_value: userMessage,
         output_type: "chat",
         input_type: "chat",
         tweaks: {
@@ -29,11 +38,29 @@ const langflowClient = async () => {
       },
       { headers }
     );
-    console.log("Data pushed successfully:", response.data);
-    return response.data;
+    
+    // Extract the actual response text from the LangFlow response
+    if (response.data) {
+      if (typeof response.data === 'string') {
+        return response.data;
+      } else if (response.data.outputs) {
+        return response.data.outputs;
+      } else if (response.data.response) {
+        return response.data.response;
+      } else {
+        console.error('Unexpected response structure:', response.data);
+        throw new Error('Invalid response format from LangFlow');
+      }
+    }
+    
+    throw new Error('Empty response from LangFlow');
   } catch (error) {
-    console.error("Error pushing data:", error);
-    return null;
+    console.error("Detailed LangFlow error:", {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status
+    });
+    throw error;
   }
 };
 
