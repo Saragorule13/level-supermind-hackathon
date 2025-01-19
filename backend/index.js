@@ -16,6 +16,10 @@ app.get("/", (req, res) => {
   res.send("Horo Backend is running");
 });
 
+app.post("/api/chatbot", (req, res) => {
+  
+});
+
 app.post("/api/getHoroscope", (req, res) => {});
 
 // Start the server

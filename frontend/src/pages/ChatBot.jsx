@@ -11,9 +11,6 @@ export default function ChatBot() {
     <ShootingStars />
     <StarsBackground />
   </div>
-
-
-    
   )
 }
 
